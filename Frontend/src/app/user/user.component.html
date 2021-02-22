@@ -1,0 +1,53 @@
+<title>Assignment</title>
+<div class="container-table">
+	<h1>{{title}}
+		<button type="button" [hidden]="onUserList" class="btn btn-info back-user-list" (click)="ngOnInit()">User List</button>
+	</h1>
+
+</div>
+<div class="container-table">
+	<div class="wrap-table">
+		<table>
+			<thead>
+			<tr>
+				<th>S.no</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Profile Image</th>
+				<th>Action</th>
+			</tr>
+			</thead>
+			<tbody>
+			<!--<tr *ngFor="let users of allUsers | paginate: { itemsPerPage: 5, currentPage: pageNumber }; index as i">-->
+			<tr *ngFor="let users of allUsers; index as i">
+				<td>{{i+1}}</td>
+				<td>{{users.first_name}}</td>
+				<td>{{users.last_name}}</td>
+				<td><img width="100" src='assets/images/{{users.avatar}}'/></td>
+				<td>
+					<button type="button" class="btn btn-primary" (click)="viewfriends(users.id)">View Friends</button>
+				</td>
+			</tr>
+			<tr ng-hide="allUsers.length">
+				<td colspan="5">No records found!</td>
+			</tr>
+			</tbody>
+		</table>
+		<!--<pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>-->
+
+		<div class="card-footer pb-0 pt-3" [hidden]="paginationDefault">
+			<ul *ngIf="currentTotalRecords > 0  " class="pagination">
+				<li [ngClass]="{disabled:pageNumber === 1}" class="page-item previous-item">
+					<a (click)="getAllUsers(pageNumber - 1)" class="page-link">Previous</a>
+				</li>
+				<li [ngClass]="{disabled:currentTotalRecords >= totalRecords}" class="page-item next-item">
+					<a (click)="getAllUsers(pageNumber + 1)" class="page-link">Next</a>
+				</li>
+
+			</ul>
+		</div>
+
+	</div>
+</div>
+
+
